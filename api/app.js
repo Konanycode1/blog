@@ -6,6 +6,7 @@ import {InProduction } from "./config/env.js";
 import path from 'path'
 import { fileURLToPath } from "url";
 import { connectDB } from "./config/db.js";
+import userRouter from './routes/user.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 config({
@@ -18,6 +19,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
 app.use(express.static(path.join(__dirname,'../dist')));
+
+app.use('/api/user',userRouter)
 
 if(InProduction){
     app.get('/*',(_,res)=> res.sendFile(path.join(__dirname,'../dist/index.html')))
