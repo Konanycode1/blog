@@ -1,19 +1,24 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
 const messageSchema = new Schema({
-    content : {type: String, required: true},
-    sender: {
-        type: Schema.Types.ObjectId,
-        ref : "user"
-    },
-    receiver: {
-        type: Schema.Types.ObjectId,
-        ref: 'user'
-    },
-    types:{
-        type: String,
-        required: true  
-    }
+  content: {
+    type: String,
+    required: true,
+  },
+  sender: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'user',
+  },
+  receiver: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'user',
+  },
+  types: {
+    type: String,
+    required: true,
+  },
 });
 
-export default  model("Message", messageSchema)
+export default model('message', messageSchema);

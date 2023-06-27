@@ -1,45 +1,54 @@
 import { Schema, model } from 'mongoose';
-import bcrypt from 'bcrypt'
 
 const userSchema = new Schema({
-    fullName: {type: String, required:true, unique: true},
-    userName: {type: String, required:true, unique: true},
-    email: {type: String, required:true, unique: true},
-    password:{type: String, required:true,minLength:6},
-    comments: {
-        type:[
-       { 
+  fullname: String,
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+    minLength: 6,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  comments: {
+    type: [
+      {
         type: Schema.Types.ObjectId,
-        ref: 'comment'
-        }
+        ref: 'comment',
+      },
     ],
-    default: []
-    },
-    poste:  {
-        type:[
-       { 
+    default: [],
+  },
+  posts: {
+    type: [
+      {
         type: Schema.Types.ObjectId,
-        ref: 'comment'
-        }
+        ref: 'post',
+      },
     ],
-    default: []
-    },
-    message: {
-        type: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'message'
-            }
-        ],
-        default: []
-    },
-    role: {type: String, requered: true, default: 'user'}
-})
-export default model("User", userSchema)
+    default: [],
+  },
+  messages: {
+    type: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'message',
+      },
+    ],
+    default: [],
+  },
+  role: {
+    type: String,
+    required: false,
+    default: 'user',
+  },
+});
 
-// userSchema.pre('save', async function(next){
-//     const user = this;
-//     user.password = bcrypt.hash(user.password, await bcrypt.genSalt(),10)
-//     next()
-
-// })
+export default model('user', userSchema);
